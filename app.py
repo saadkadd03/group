@@ -11,7 +11,7 @@ from reportlab.lib.units import inch
 from docx import Document
 
 app = Flask(__name__)
-DATABASE = 'submissions.db'
+DATABASE = "/tmp/submissions.db"
 SECRET_CODE = "admin123"   # ← Change this
 
 # ================== DATA ==================
