@@ -295,5 +295,7 @@ def download_word():
 
 
 if __name__ == "__main__":
+@app.before_first_request
+def setup():
     init_db()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
