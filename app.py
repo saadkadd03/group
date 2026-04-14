@@ -294,10 +294,6 @@ def download_word():
                      mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     init_db()
-    print("🚀 UniPresent App Started!")
-    print("Student Form: http://127.0.0.1:5000")
-    print("Admin: http://127.0.0.1:5000/admin")
-    print(f"Admin Code: {SECRET_CODE}")
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
