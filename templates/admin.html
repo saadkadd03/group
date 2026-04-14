@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kira • Admin Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap');
+        .tail-container * { font-family: 'Inter', system_ui, sans-serif; }
+    </style>
+</head>
+<body class="tail-container bg-slate-950 text-white min-h-screen flex items-center justify-center">
+    <div class="max-w-lg w-full mx-auto bg-white text-slate-900 rounded-3xl shadow-2xl p-10">
+        <div class="flex justify-center mb-8">
+            <div class="px-6 py-2 bg-slate-100 text-slate-500 rounded-3xl text-sm font-medium flex items-center gap-x-2">
+                🔐 ADMIN ONLY
+            </div>
+        </div>
+        
+        <h1 class="text-4xl font-semibold text-center mb-2">Generate Final Groups</h1>
+        <p class="text-slate-500 text-center mb-10">Enter the admin code to automatically assign students</p>
+
+        {% if error %}
+        <div class="mb-6 bg-red-50 border border-red-200 text-red-700 rounded-2xl p-4 text-sm">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" class="space-y-6">
+            <div>
+                <label class="block text-xs uppercase tracking-widest mb-2 text-slate-400">Admin Code</label>
+                <input type="password" name="code" required
+                       class="w-full large-input border border-slate-200 focus:border-red-400 focus:ring-red-100 text-xl placeholder:text-slate-300"
+                       placeholder="••••••••">
+            </div>
+            
+            <button type="submit"
+                    class="w-full py-6 bg-red-600 hover:bg-red-700 text-white text-xl font-semibold rounded-3xl flex items-center justify-center gap-x-3 transition-all active:scale-[0.97]">
+                GENERATE ASSIGNMENTS NOW
+                <span class="text-3xl">⚡</span>
+            </button>
+        </form>
+
+        <div class="mt-12 text-center">
+            <a href="/" class="text-slate-400 hover:text-slate-600 text-sm flex items-center justify-center gap-x-1">
+                ← Back to Student Form
+            </a>
+        </div>
+
+        <div class="text-[10px] text-slate-300 mt-16 text-center">
+            This action will respect all student preferences first,<br>
+            then fill remaining slots randomly.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tailwind CDN init
+        })
+    </script>
+</body>
+</html>

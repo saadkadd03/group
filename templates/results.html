@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniPresent • Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        * { font-family: 'Inter', system_ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <div class="max-w-6xl mx-auto p-8">
+        <div class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="text-4xl font-semibold text-slate-900">Final Group Assignments</h1>
+                <p class="text-slate-500">Generated automatically • {{ groups|length }} presentations</p>
+            </div>
+            <div class="flex gap-4">
+                <a href="/download_pdf" class="flex items-center gap-x-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-3xl font-semibold shadow-lg transition">
+                    📄 Download PDF
+                </a>
+                <a href="/download_word" class="flex items-center gap-x-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-3xl font-semibold shadow-lg transition">
+                    📝 Download Word Document
+                </a>
+                <a href="/admin" class="px-6 py-4 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-3xl font-medium">
+                    ← Back to Admin
+                </a>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for group in groups %}
+            {% if group.assigned and group.assigned|length > 0 %}
+            <div class="bg-white rounded-3xl border border-slate-100 p-6 hover:shadow-md transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-semibold text-lg leading-tight">{{ group.title }}</h3>
+                    <span class="px-4 py-1 text-xs font-mono bg-slate-100 text-slate-500 rounded-3xl">
+                        {{ group.assigned|length }} / {{ group.size }}
+                    </span>
+                </div>
+                <ul class="space-y-2 text-slate-700">
+                    {% for student in group.assigned %}
+                    <li class="flex items-center gap-x-3">
+                        <span class="text-emerald-500">●</span>
+                        {{ student }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="mt-12 bg-white rounded-3xl p-6 text-center border border-slate-100">
+            <p class="text-slate-600 text-lg">
+                Total students assigned: 
+                <strong class="text-3xl text-slate-900">{{ groups | map(attribute='assigned') | sum(start=[]) | length }}</strong>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
